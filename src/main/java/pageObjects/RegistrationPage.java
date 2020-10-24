@@ -23,6 +23,7 @@ public WebDriver driver;
 	By profile = By.xpath("//*[@id=\"header\"]/nav/div/div[2]/div/ul[2]/li[1]/ul/li[1]/a");
 	By validateUser = By.cssSelector("[class='username']");
 	By logout = By.cssSelector("[href*='https://phptravels.com/blog/logout']");
+	By profileTitle = By.cssSelector("[class='page-title']");
 	
 	public RegistrationPage(WebDriver driver) {
 		// TODO Auto-generated constructor stub
@@ -104,5 +105,9 @@ public WebElement getProfile()
 public WebElement getValidateUser()
 {
 	return driver.findElement(validateUser);
+}
+public WebElement getProfileTitle()
+{
+	return driver.findElement(profileTitle);
 }
 }

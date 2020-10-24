@@ -7,7 +7,9 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -22,7 +24,7 @@ import pageObjects.LoginPage;
 import pageObjects.RegistrationPage;
 import resources.base;
 
-public class HomePage extends base{
+public class RegistrationPageTest extends base{
 	public WebDriver driver;
 	
 	 public static Logger log =LogManager.getLogger(base.class.getName());
@@ -35,29 +37,37 @@ public class HomePage extends base{
 	}
 	@Test(dataProvider="getData")
 	
-	public void basePageNavigation(String Username,String email,String Password, String text) throws Exception
+	public void RegistrationPageNavigation(String Username,String email,String Password, String text) throws Exception
 	{
 		// creating object to that class and invoke methods of it
 		driver.get(prop.getProperty("url"));
 		
 		// Registering new User
 		RegistrationPage rg =new RegistrationPage(driver);
-		
-	
 		rg.getRegisterMain().click();
-		
 		rg.getUsername().sendKeys(Username);
 		rg.getEmail().sendKeys(email);
 		rg.getPassword().sendKeys(Password);
 		rg.getConfirmPassword().sendKeys(Password);
 	    rg.getIcon().click();;
-		rg.getSubmit().submit();
-//		if(rg.getErrorMsg().equals("The Username field must be at least 4 characters in length.")) 
-//			{   foobar(Username);
-//		    }
-//	    else {
-//	        throw new Exception("Something bad happened.");
-//	    };
+		rg.getSubmit();
+		
+		try
+        {
+		 String title1 = rg.getProfileTitle().getText();
+
+        if(title1.equals("Settings"))
+       {
+	System.out.println("----------Sucessful Registration -------\n-----------------------");
+       }else
+       {
+	System.out.println("----------Registration failed ----------\n-----------------------");
+	}
+       }
+     catch(Throwable e)
+        {
+	 System.out.println("User can't register "+e.getMessage());
+        }
 		
 		//LSave changes and validate user
 		rg.getAboutMe().sendKeys(text);
@@ -69,52 +79,9 @@ public class HomePage extends base{
 		rg.getDropdown().click();
 		rg.getLogout().click();
 
-		//Login
-		LoginPage lg = new LoginPage(driver);
-	    lg.getLoginMain().click();
-		//Forgot password
-		ForgotPassword fp= new ForgotPassword(driver);
-		fp.getEmail().sendKeys(email);
-		fp.getResetPassword().click();
-		//Login as registered user
-		lg.getUsername().sendKeys(Username);
-		lg.getPassword().sendKeys(Password);
-		lg.getLogin().click();
-		
-		//Contact using Whatsapp
-        HomePg hp= new HomePg(driver);
-        hp.getReadMore().click();
-        
-        hp.getWhatsapplink().click();
-        String parent = driver.getWindowHandle();
-        
-        Set<String> s =driver.getWindowHandles();
-        java.util.Iterator<String> i= s.iterator();
-        while(i.hasNext())
-        {
-        	String child = i.next();
-        	
-        	if(!parent.equals(child))
-        	{
-        	driver.switchTo().window(child);
-
-        	System.out.println(driver.switchTo().window(child).getTitle());
-
-        	driver.close();
-        	}
-        }
-        	driver.switchTo().window(parent);
-    
-//       Assert.assertEquals(Whatsapp, "WHATSAPP WEB");
-    
-		log.info(text);
 
 		}
 
-//	private void foobar(String Username) {
-//		RegistrationPage rg=new RegistrationPage(driver);
-//		rg.getUsername().sendKeys(Username);
-//	}
 	@AfterTest
 	public void teardown()
 	{

@@ -9,6 +9,7 @@ public class ForgotPassword {
 	
 	public WebDriver driver;
 	
+	By forgotPswd = By.cssSelector("[class='link-forget']");
 	By email=By.cssSelector("[name='email']");
 	By resetPassword=By.cssSelector("[type='submit']");
 	
@@ -34,7 +35,10 @@ public class ForgotPassword {
 		return driver.findElement(resetPassword);
 	}
 	
-	
+	public WebElement getForgotPswd()
+	{
+		return driver.findElement(forgotPswd);
+	}
 
 	
 	
