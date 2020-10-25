@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+<listeners>
+<listener class-name="Academy.Listeners"/>
+</listeners>
+
+     <test name="Validating User Registration in PHPTravels app">
+    <classes>
+      <class name="Academy.LoginPageTest"/>
+          </classes>
+      </test>
+      <test name="Validating User Registration in PHPTravels app with wrong details1">
+    <classes>
+      <class name="Academy.LoginPageTest2"/>
+          </classes>
+      </test>
+      <test name="Validating User Registration in PHPTravels app with wrong details2">
+    <classes>
+      <class name="Academy.LoginPageTest3"/>
+          </classes>
+      </test>
+  <test name="Validating User login in PHPTravels app with correct creds">
+    <classes>
+      <class name="Academy.RegistrationPageTest"/>
+          </classes>
+      </test>
+<test name="Validating User login in PHPTravels app with incorrect creds1">
+    <classes>
+      <class name="Academy.RegistrationPageTest2"/>
+          </classes>
+      </test>
+      <test name="Validating User login in PHPTravels app with incorrect creds2">
+    <classes>
+      <class name="Academy.RegistrationPageTest3"/>
+          </classes>
+      </test>
+
+      <test name="Validating Forgot Password feature">
+         <classes>
+      <class name="Academy.ForgotPswdPageTest"/>
+       </classes>
+      </test>
+   <!-- Test -->
+</suite> <!-- Suite -->
